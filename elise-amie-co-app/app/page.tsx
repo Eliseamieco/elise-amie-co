@@ -11,7 +11,6 @@ export default async function Home() {
 if (error) {
   console.error("Error loading products:", error);
 }
-console.log("PRODUCTS FROM SUPABASE:", products);
   return (
     
     <main className="min-h-screen bg-[#F8F6F2] text-[#2B2B2B]">
@@ -94,9 +93,15 @@ console.log("PRODUCTS FROM SUPABASE:", products);
     </div>
 
     <div className="p-6">
-      <p className="text-xs uppercase tracking-[0.2em] text-[#C48A99]">
-        ♡ Just Arrived
-      </p>
+      {product.sold ? (
+  <p className="text-xs uppercase tracking-[0.2em] text-[#B87989]">
+    Sold
+  </p>
+) : (
+  <p className="text-xs uppercase tracking-[0.2em] text-[#C48A99]">
+    ♡ Just Arrived
+  </p>
+)}
 
       <h3 className="mt-3 text-xl font-medium text-[#2B2B2B]">
         {product.name}
@@ -106,12 +111,21 @@ console.log("PRODUCTS FROM SUPABASE:", products);
         £{product.price}
       </p>
 
-      <Link
-  href={`/products/${product.products}`}
-  className="mt-6 inline-block text-sm uppercase tracking-[0.2em] text-[#B87989] transition hover:text-[#C48A99]"
->
-  View Details →
-</Link>
+      {product.sold ? (
+  <Link
+    href={`/products/${product.products}`}
+    className="mt-6 inline-block text-sm uppercase tracking-[0.2em] text-neutral-400 transition hover:text-[#B87989]"
+  >
+    View Sold Piece →
+  </Link>
+) : (
+  <Link
+    href={`/products/${product.products}`}
+    className="mt-6 inline-block text-sm uppercase tracking-[0.2em] text-[#B87989] transition hover:text-[#C48A99]"
+  >
+    View Details →
+  </Link>
+)}
     </div>
   </div>
 ))}

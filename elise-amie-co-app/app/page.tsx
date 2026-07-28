@@ -1,9 +1,21 @@
+import Link from "next/link";
 import Image from "next/image";
+import { supabase } from "../lib/supabase";
 
-export default function Home() {
+export default async function Home() {
+  const { data: products, error } = await supabase
+  .from("products")
+  .select("*")
+  .order("created_at", { ascending: false });
+
+if (error) {
+  console.error("Error loading products:", error);
+}
+console.log("PRODUCTS FROM SUPABASE:", products);
   return (
     
     <main className="min-h-screen bg-[#F8F6F2] text-[#2B2B2B]">
+      
       <div className="bg-[#E8C8D0] py-2 text-center text-xs uppercase tracking-[0.25em] text-[#2B2B2B]">
   Free UK Delivery on Orders Over £50 • 
 </div>
@@ -25,12 +37,23 @@ export default function Home() {
       
     </p>
 
-   <div className="mt-6 flex justify-center gap-10 text-xs uppercase tracking-[0.25em]">
-      <a href="#" className="transition hover:text-[#C48A99]">Home</a>
-      <a href="#" className="transition hover:text-[#C48A99]">Shop</a>
-      <a href="#" className="transition hover:text-[#C48A99]">About</a>
-      <a href="#" className="transition hover:text-[#C48A99]">Contact</a>
-    </div>
+   <div className="mt-6 flex justify-center gap-12 text-xs uppercase tracking-[0.25em]">
+  <Link href="/" className="transition hover:text-[#C48A99]">
+    Home
+  </Link>
+
+ <Link href="/collection" className="transition hover:text-[#C48A99]">
+  Our Collection
+</Link>
+
+  <Link href="/about" className="transition hover:text-[#C48A99]">
+    About
+  </Link>
+
+  <Link href="/contact" className="transition hover:text-[#C48A99]">
+    Contact
+  </Link>
+</div>
 
     </div>
     
@@ -44,61 +67,83 @@ export default function Home() {
 
 
 <p className="mb-10 max-w-2xl text-lg leading-8 text-gray-600">
-  Discover carefully selected pre-loved fashion that's ready for its next chapter.
+  Pre-loved pieces chosen to be loved again.
 </p>
 
-  <button className="rounded-full bg-[#E8C8D0] px-10 py-4 mb-8 text-sm font-semibold uppercase tracking-[0.2em] text-[#2B2B2B] transition duration-300 hover:scale-105 hover:bg-[#D8A7B1]">
-  Shop Collection
-</button>
-
-<h2 className="text-3xl font-light text-center tracking-[0.2em] uppercase">
-  New Arrivals
+  <h2 className="text-4xl font-light tracking-[0.2em] text-[#2B2B2B]">
+  Our Collection
 </h2>
 
-<p className="mt-4 text-center text-neutral-600 max-w-xl mx-auto">
-  A carefully selected collection of pre-loved fashion, chosen for its quality,
-  style and next chapter.
 
-  
-</p>
 <p className="mb-2 text-xs uppercase tracking-[0.25em] text-[#C89AA5]">
   ♡ Just Arrived
 </p>
         <div className="grid gap-8 md:grid-cols-3">
 
-          <div className="rounded-2xl border border-[#E7E2DC] p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-  <Image
-  src="/white-sequin-mini-dress.jpg"
-  alt="White Sequin Cowl Mini Dress"
-  width={500}
-  height={700}
-  className="mb-4 h-80 w-full rounded-xl object-cover object-top"
-/>
-  <h3 className="font-semibold">
-  White Sequin Cowl Mini Dress
-</h3>
+          {products?.map((product) => (
+  <div
+    key={product.products}
+    className="overflow-hidden rounded-3xl border border-[#E7E2DC] bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+  >
+    <div className="overflow-hidden">
+      <img
+        src={String(product.image_url).trim()}
+        alt={product.name}
+        className="h-96 w-full object-cover object-top transition duration-500 hover:scale-105"
+      />
+    </div>
 
-<p className="text-gray-600 font-medium">
-  £20
-</p>
-</div>
+    <div className="p-6">
+      <p className="text-xs uppercase tracking-[0.2em] text-[#C48A99]">
+        ♡ Just Arrived
+      </p>
 
-<div className="rounded-2xl border border-[#E7E2DC] p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-  <div className="mb-4 h-72 rounded-xl bg-[#F3ECE8]"></div>
-  <h3 className="font-semibold">Oversized Graphic Tee</h3>
-  <p className="text-gray-600">£12</p>
-</div>
+      <h3 className="mt-3 text-xl font-medium text-[#2B2B2B]">
+        {product.name}
+      </h3>
 
-<div className="rounded-2xl border border-[#E7E2DC] p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-  <div className="mb-4 h-72 rounded-xl bg-[#F3ECE8]"></div>
-  <h3 className="font-semibold">Denim Shorts</h3>
-  <p className="text-gray-600">£16</p>
-</div>
+      <p className="mt-2 text-lg text-[#B87989]">
+        £{product.price}
+      </p>
 
+      <Link
+  href={`/products/${product.products}`}
+  className="mt-6 inline-block text-sm uppercase tracking-[0.2em] text-[#B87989] transition hover:text-[#C48A99]"
+>
+  View Details →
+</Link>
+    </div>
+  </div>
+))}
+   
         </div>
       </section>
+      <footer className="mt-24 border-t border-[#E7E2DC] bg-white">
+  <div className="mx-auto max-w-6xl px-6 py-16 text-center">
+
+    {/* Logo goes here */}
+
+    <p className="mt-4 text-sm tracking-[0.15em] text-neutral-500">
+      Style, Loved Again
+    </p>
+
+    <div className="mt-10">
+      <a
+        href="#"
+        className="text-xs uppercase tracking-[0.2em] transition hover:text-[#C48A99]"
+      >
+        Contact
+      </a>
+    </div>
+
+    <p className="mt-12 text-xs text-neutral-400">
+      © 2026 Amie Co. All rights reserved.
+    </p>
+
+  </div>
+</footer>
     </main>
-  );
+    );
 }
 
   

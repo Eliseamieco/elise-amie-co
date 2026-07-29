@@ -58,14 +58,14 @@ if (error) {
     
 </nav>
 
-      <section className="flex flex-col items-center justify-center px-6 py-24 text-center">
+      <section className="flex flex-col items-center justify-center px-6 py-16 text-center">
 
   <p className="mt-3 text-center text-sm tracking-[0.15em] text-neutral-500">
   STYLE, LOVED AGAIN
 </p>
 
 
-<p className="mb-10 max-w-2xl text-lg leading-8 text-gray-600">
+<p className="mb-6 max-w-2xl text-lg leading-8 text-gray-600">
   Pre-loved pieces chosen to be loved again.
 </p>
 
@@ -74,10 +74,8 @@ if (error) {
 </h2>
 
 
-<p className="mb-2 text-xs uppercase tracking-[0.25em] text-[#C89AA5]">
-  ♡ Just Arrived
-</p>
-        <div className="grid gap-8 md:grid-cols-3">
+
+        <div className="mt-6 grid gap-8 md:grid-cols-3">
 
           {products?.map((product) => (
   <div

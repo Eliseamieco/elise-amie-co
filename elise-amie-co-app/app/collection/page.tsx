@@ -14,8 +14,16 @@ if (error) {
       <div className="bg-[#E8C8D0] py-3 text-center text-sm font-medium tracking-[0.15em] text-[#2B2B2B]">
 Free UK Delivery on Orders Over £50
 </div>
-      <main className="mx-auto max-w-6xl px-6 py-20"></main>
+      
 
+<div className="mx-auto max-w-6xl px-6 pt-8">
+  <Link
+    href="/"
+    className="text-xs uppercase tracking-[0.2em] text-[#B87989] transition hover:text-[#2B2B2B]"
+  >
+    ← Home
+  </Link>
+</div>
       <section className="text-center">
         <h1 className="text-5xl font-light tracking-[0.2em] text-[#2B2B2B]">
           Our Collection

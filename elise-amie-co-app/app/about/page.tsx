@@ -1,5 +1,4 @@
-
-import Image from "next/image";
+import Link from "next/link";
 
 export default function AboutPage() {
   return (
@@ -8,19 +7,27 @@ export default function AboutPage() {
         Free UK Delivery on Orders Over £50
       </div>
 
-      <main className="mx-auto max-w-4xl px-6 py-20 text-center">
+      <div className="px-6 pt-8">
+        <Link
+          href="/"
+          className="text-xs uppercase tracking-[0.2em] text-[#B87989] transition hover:text-[#2B2B2B]"
+        >
+          ← Home
+        </Link>
+      </div>
 
+      <main className="mx-auto max-w-4xl px-6 pt-12 pb-20 text-center">
         <h1 className="text-5xl font-light tracking-[0.2em] text-[#2B2B2B]">
           About Amie Co
         </h1>
 
-        <p className="mt-16 text-xl italic text-[#2B2B2B] leading-8">
+        <p className="mt-16 text-xl italic leading-8 text-[#2B2B2B]">
           Beautiful things chosen to be loved again.
         </p>
 
         <p className="mt-12 text-lg leading-9 text-neutral-600">
-          Every item has been thoughtfully chosen for its beauty, quality
-          and individuality.
+          Every item has been thoughtfully chosen for its beauty, quality and
+          individuality.
         </p>
 
         <p className="mt-12 text-lg italic text-[#2B2B2B]">
@@ -38,7 +45,6 @@ export default function AboutPage() {
             className="mx-auto w-56"
           />
         </div>
-
       </main>
     </>
   );

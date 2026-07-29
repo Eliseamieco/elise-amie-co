@@ -10,7 +10,7 @@ if (error) {
   console.error("Error loading collection:", error);
 }
   return (
-    <main>
+  <main className="min-h-screen bg-[#F8F6F2] text-[#2B2B2B]">
       <div className="bg-[#E8C8D0] py-3 text-center text-sm font-medium tracking-[0.15em] text-[#2B2B2B]">
 Free UK Delivery on Orders Over £50
 </div>
@@ -24,7 +24,7 @@ Free UK Delivery on Orders Over £50
     ← Home
   </Link>
 </div>
-      <section className="text-center">
+      <section className="px-6 pt-14 text-center">
         <h1 className="text-5xl font-light tracking-[0.2em] text-[#2B2B2B]">
           Our Collection
         </h1>
@@ -39,23 +39,23 @@ Free UK Delivery on Orders Over £50
 </section>
 
 
-<section className="mt-20 border-t border-[#E7E2DC] pt-16">
-
-<div className="space-y-16">
+<section className="mt-16 border-t border-[#E7E2DC] px-6 pt-8">
+  <div className="mx-auto grid max-w-3xl gap-8 md:grid-cols-2">
   {products?.map((product) => (
     <div
       key={product.products}
-      className="flex items-start gap-10"
-    >
-      <div>
-        <img
-          src={product.image_url}
-          alt={product.name}
-          className="w-48 rounded-lg"
-        />
-      </div>
+  className="overflow-hidden rounded-3xl border border-[#E7E2DC] bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+>
+    
+     <div className="overflow-hidden">
+  <img
+    src={String(product.image_url).trim()}
+    alt={product.name}
+    className="h-96 w-full object-cover object-top transition duration-500 hover:scale-105"
+  />
+</div>
 
-      <div>
+      <div className="p-6">
         <div className="flex items-center gap-4">
   <h2 className="text-2xl font-light text-[#2B2B2B]">
     {product.name}
@@ -95,13 +95,17 @@ Free UK Delivery on Orders Over £50
     </div>
   ))}
 </div>
-<div className="mt-24">
-          <img
-            src="/logo.png"
-            alt="Amie Co"
-            className="mx-auto w-56"
-          />
-        </div>
+<div className="mt-10 border-t border-[#E7E2DC] py-10 text-center">
+  <img
+    src="/logo.png"
+    alt="Amie Co"
+    className="mx-auto w-40"
+  />
+
+  <p className="mt-4 text-xs uppercase tracking-[0.25em] text-neutral-400">
+    Style, Loved Again
+  </p>
+</div>
 </section>
     </main>
   );

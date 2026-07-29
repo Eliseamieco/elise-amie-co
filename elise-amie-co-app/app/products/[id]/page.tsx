@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { supabase } from "../../../lib/supabase";
+import AddToBagButton from "../../components/AddToBagButton";
 
 export default async function ProductPage({
   params,
@@ -19,8 +20,13 @@ export default async function ProductPage({
   }
 
   return (
-    <main className="min-h-screen bg-[#F8F6F2] text-[#2B2B2B]">
-      <div className="mx-auto max-w-6xl px-6 py-16">
+    
+  <main className="min-h-screen bg-[#F8F6F2] text-[#2B2B2B]">
+    <div className="bg-[#E8C8D0] py-3 text-center text-sm font-medium tracking-[0.15em] text-[#2B2B2B]">
+      Free UK Delivery on Orders Over £50
+    </div>
+
+    <div className="mx-auto max-w-6xl px-6 py-16">
         <Link
           href="/collection"
           className="text-xs uppercase tracking-[0.2em] text-[#B87989]"
@@ -70,6 +76,17 @@ export default async function ProductPage({
                 {product.description}
               </p>
             </div>
+
+{!product.sold && (
+  <AddToBagButton
+    product={{
+      id: product.products,
+      name: product.name,
+      price: product.price,
+      image_url: product.image_url,
+    }}
+  />
+)}
 
             {product.sold && (
               <div className="mt-10 rounded-2xl bg-[#F3ECE8] px-6 py-5 text-center">

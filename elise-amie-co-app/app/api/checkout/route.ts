@@ -53,7 +53,7 @@ if (!productId) {
   );
 }
 
-const origin = new URL(request.url).origin;
+const origin = process.env.NEXT_PUBLIC_SITE_URL!;
 
 const session = await stripe.checkout.sessions.create({
   mode: "payment",

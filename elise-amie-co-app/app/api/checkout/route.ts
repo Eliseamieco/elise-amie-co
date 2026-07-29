@@ -27,9 +27,11 @@ if (!productId) {
     // We do NOT trust the price stored in the customer's browser.
     const { data: product, error } = await supabase
       .from("products")
-      .select("products, name, price, image_url, sold")
+      .select("products, name, price, image_url")
 .eq("products", productId)
 .single();
+console.log("PRODUCT LOOKUP:", product, error);
+
     if (error || !product) {
       return NextResponse.json(
         { error: "Product not found." },
@@ -37,12 +39,7 @@ if (!productId) {
       );
     }
 
-    if (product.sold) {
-      return NextResponse.json(
-        { error: "Sorry, this piece has already been sold." },
-        { status: 409 }
-      );
-    }
+    
 
     const priceInPence = Math.round(Number(product.price) * 100);
 

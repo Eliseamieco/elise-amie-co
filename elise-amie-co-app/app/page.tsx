@@ -91,7 +91,7 @@ if (error) {
     </div>
 
     <div className="p-6">
-      {product.sold ? (
+      {product.SOLD ? (
   <p className="text-xs uppercase tracking-[0.2em] text-[#B87989]">
     Sold
   </p>
@@ -109,7 +109,7 @@ if (error) {
         £{product.price}
       </p>
 
-      {product.sold ? (
+      {product.SOLD ? (
   <Link
     href={`/products/${product.products}`}
     className="mt-6 inline-block text-sm uppercase tracking-[0.2em] text-neutral-400 transition hover:text-[#B87989]"

@@ -44,15 +44,15 @@ export default async function ProductPage({
           </div>
 
           <div className="flex flex-col justify-center">
-            {product.sold ? (
-              <p className="text-xs uppercase tracking-[0.25em] text-[#B87989]">
-                Sold
-              </p>
-            ) : (
-              <p className="text-xs uppercase tracking-[0.25em] text-[#C48A99]">
-                ♡ Just Arrived
-              </p>
-            )}
+            {product.SOLD ? (
+  <p className="text-xs uppercase tracking-[0.25em] text-[#B87989]">
+    Sold
+  </p>
+) : (
+  <p className="text-xs uppercase tracking-[0.25em] text-[#C48A99]">
+    ♡ Just Arrived
+  </p>
+)}
 
             <h1 className="mt-4 text-4xl font-light tracking-[0.1em]">
               {product.name}
@@ -77,7 +77,7 @@ export default async function ProductPage({
               </p>
             </div>
 
-{!product.sold && (
+{!product.SOLD && (
   <AddToBagButton
     product={{
       id: product.products,
@@ -88,7 +88,7 @@ export default async function ProductPage({
   />
 )}
 
-            {product.sold && (
+            {product.SOLD && (
               <div className="mt-10 rounded-2xl bg-[#F3ECE8] px-6 py-5 text-center">
                 <p className="text-sm uppercase tracking-[0.2em] text-[#B87989]">
                   This piece has found a new home

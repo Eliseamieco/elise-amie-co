@@ -61,7 +61,7 @@ Free UK Delivery on Orders Over £50
     {product.name}
   </h2>
 
-  {product.sold && (
+  {product.SOLD && (
     <span className="rounded-full bg-[#E8C8D0] px-3 py-1 text-xs uppercase tracking-[0.2em] text-[#2B2B2B]">
       Sold
     </span>
@@ -76,7 +76,7 @@ Free UK Delivery on Orders Over £50
           {product.description}
         </p>
 
-        {product.sold ? (
+        {product.SOLD ? (
   <Link
     href={`/products/${product.products}`}
     className="mt-6 inline-block text-sm uppercase tracking-[0.2em] text-neutral-400 transition hover:text-[#B87989]"

@@ -31,6 +31,14 @@ export default function ContactPage() {
     <br />
     Get in touch and we'll get back to you as soon as we can.
   </p>
+  <p className="mt-4">
+  <a
+    href="mailto:hello@amieco.co.uk"
+    className="font-medium text-[#B87989] transition hover:text-[#9E6574]"
+  >
+    hello@amieco.co.uk
+  </a>
+</p>
 
   <div className="mt-12">
   <img

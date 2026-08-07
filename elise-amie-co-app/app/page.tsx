@@ -131,31 +131,28 @@ if (error) {
         </div>
       </section>
       <footer className="mt-24 border-t border-[#E7E2DC] bg-white">
-  <div className="mx-auto max-w-6xl px-6 py-16 text-center">
+  <div className="mx-auto max-w-6xl px-6 py-12 text-center">
+    <h3 className="text-lg font-light tracking-[0.15em] text-[#2B2B2B]">
+      Amie Co
+    </h3>
 
-    {/* Logo goes here */}
-
-    <p className="mt-4 text-sm tracking-[0.15em] text-neutral-500">
-      Style, Loved Again
+    <p className="mt-4 text-sm text-neutral-600">
+      Questions about a piece? We'd love to help. ♡
     </p>
 
-    <div className="mt-10">
-      <a
-        href="#"
-        className="text-xs uppercase tracking-[0.2em] transition hover:text-[#C48A99]"
-      >
-        Contact
-      </a>
-    </div>
+    <a
+      href="mailto:hello@amieco.co.uk"
+      className="mt-2 inline-block font-medium text-[#B87989] transition hover:text-[#9E6574]"
+    >
+      hello@amieco.co.uk
+    </a>
 
-    <p className="mt-12 text-xs text-neutral-400">
-      © 2026 Amie Co. All rights reserved.
+    <p className="mt-8 text-xs uppercase tracking-[0.2em] text-neutral-400">
+      © {new Date().getFullYear()} Amie Co. All rights reserved.
     </p>
-
   </div>
 </footer>
-    </main>
-    );
-}
 
-  
+</main>
+  );
+}

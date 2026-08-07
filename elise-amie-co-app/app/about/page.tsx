@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    <>
-      <div className="bg-[#E8C8D0] py-3 text-center text-xs tracking-[0.2em] text-[#2B2B2B] uppercase">
+    <main className="min-h-screen bg-[#F8F6F2] text-[#2B2B2B]">
+      <div className="bg-[#E8C8D0] py-3 text-center text-sm font-medium tracking-[0.15em] text-[#2B2B2B]">
         Free UK Delivery on Orders Over £50
       </div>
 
@@ -16,7 +16,7 @@ export default function AboutPage() {
         </Link>
       </div>
 
-      <main className="mx-auto max-w-4xl px-6 pt-12 pb-20 text-center">
+      <div className="mx-auto max-w-4xl px-6 pt-12 pb-20 text-center">
         <h1 className="text-5xl font-light tracking-[0.2em] text-[#2B2B2B]">
           About Amie Co
         </h1>
@@ -37,6 +37,16 @@ export default function AboutPage() {
         <p className="mt-12 text-lg leading-9 text-neutral-600">
           We hope you find something you'll love for many years to come.
         </p>
+        <p className="mt-12 text-lg leading-9 text-neutral-600">
+  If you have any questions about a piece or your order, we'd love to hear from you.
+</p>
+
+<a
+  href="mailto:hello@amieco.co.uk"
+  className="mt-4 inline-block font-medium text-[#B87989] transition hover:text-[#9E6574]"
+>
+  hello@amieco.co.uk
+</a>
 
         <div className="mt-24">
           <img
@@ -45,7 +55,7 @@ export default function AboutPage() {
             className="mx-auto w-56"
           />
         </div>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }

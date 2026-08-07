@@ -19,6 +19,39 @@ export default async function ProductPage({
     return <div>Product not found.</div>;
   }
 
+if (product.SOLD) {
+  return (
+    <main className="min-h-screen bg-[#F8F6F2] text-[#2B2B2B] flex items-center justify-center px-6">
+      <div className="max-w-2xl text-center">
+        <img
+          src="/logo.png"
+          alt="Amie Co"
+          className="mx-auto mb-10 w-56"
+        />
+
+        <h1 className="text-4xl font-light tracking-[0.15em]">
+          This piece has already found its new home ♡
+        </h1>
+
+        <p className="mt-8 text-lg leading-8 text-neutral-600">
+          Every item at Amie Co is completely one of a kind.
+        </p>
+
+        <p className="mt-6 text-lg leading-8 text-neutral-600">
+          Although this piece has now been sold, we're always adding beautiful
+          new arrivals waiting to be loved again.
+        </p>
+
+        <Link
+          href="/collection"
+          className="mt-12 inline-block rounded-full bg-[#E8C8D0] px-10 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-[#2B2B2B] transition hover:bg-[#D8A7B1]"
+        >
+          Continue Shopping ♡
+        </Link>
+      </div>
+    </main>
+  );
+}
   return (
     
   <main className="min-h-screen bg-[#F8F6F2] text-[#2B2B2B]">

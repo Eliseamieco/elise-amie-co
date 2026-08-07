@@ -6,6 +6,7 @@ export default async function Home() {
   const { data: products, error } = await supabase
   .from("products")
   .select("*")
+  .eq("SOLD", false)
   .order("created_at", { ascending: false });
 
 if (error) {

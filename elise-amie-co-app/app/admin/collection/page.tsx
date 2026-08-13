@@ -8,8 +8,9 @@ export const dynamic = "force-dynamic";
 export default async function AdminCollectionPage() {
   const { data: products, error } = await supabase
     .from("products")
-    .select("*")
-    .order("created_at", { ascending: false });
+.select("*")
+.eq("SOLD", false)
+.order("created_at", { ascending: false });
 
   if (error) {
     console.error("Error loading products:", error);
@@ -66,7 +67,7 @@ export default async function AdminCollectionPage() {
       </div>
 
       <div className="flex flex-col gap-2">
-        {product.sold ? (
+        {product.SOLD ? (
           <span className="rounded-full bg-[#F3ECE8] px-5 py-3 text-center text-xs uppercase tracking-[0.15em] text-[#B87989]">
             Sold
           </span>

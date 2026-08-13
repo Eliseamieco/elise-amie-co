@@ -76,7 +76,12 @@ Free UK Delivery on Orders Over £50
           {product.description}
         </p>
 
-        {product.SOLD ? (
+        <Link
+  href={`/products/${product.products}`}
+  className="mt-6 inline-block text-sm uppercase tracking-[0.2em] text-[#C48A99] transition hover:text-[#B87989]"
+>
+  View Details →
+</Link>
   <Link
     href={`/products/${product.products}`}
     className="mt-6 inline-block text-sm uppercase tracking-[0.2em] text-neutral-400 transition hover:text-[#B87989]"
@@ -90,7 +95,7 @@ Free UK Delivery on Orders Over £50
   >
     View Details →
   </Link>
-)}
+
       </div>
     </div>
   ))}

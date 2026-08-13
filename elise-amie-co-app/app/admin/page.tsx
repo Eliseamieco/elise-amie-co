@@ -35,9 +35,12 @@ export default function AdminPage() {
             Collection
           </Link>
 
-          <button className="rounded-full border border-[#E7E2DC] px-8 py-4 text-sm uppercase tracking-[0.2em] transition hover:bg-white">
-            Orders
-          </button>
+ <Link
+  href="/admin/sales"
+  className="rounded-full border border-[#E7E2DC] px-8 py-4 text-sm uppercase tracking-[0.2em] transition hover:bg-white"
+>
+  Sales History
+</Link>         
 
           <button className="rounded-full border border-[#E7E2DC] px-8 py-4 text-sm uppercase tracking-[0.2em] transition hover:bg-white">
             Settings

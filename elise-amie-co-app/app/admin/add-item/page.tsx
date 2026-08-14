@@ -47,7 +47,7 @@ async function handleAddItem() {
       condition,
       description,
       image_url: imageUrl,
-      sold: false,
+      SOLD: false,
       created_at: new Date().toISOString(),
     });
 

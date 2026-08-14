@@ -32,7 +32,7 @@ export default function AdminPage() {
             href="/admin/collection"
             className="rounded-full border border-[#E7E2DC] px-8 py-4 text-sm uppercase tracking-[0.2em] transition hover:bg-white"
           >
-            Collection
+            Current Collection
           </Link>
 
  <Link

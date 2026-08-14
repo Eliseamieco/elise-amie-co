@@ -60,8 +60,11 @@ export default async function SalesHistoryPage() {
                 </p>
 
                 <p className="mt-2 text-xs uppercase tracking-[0.15em] text-neutral-500">
-                  Sold
-                </p>
+  Sold{" "}
+  {product.sold_at
+    ? new Date(product.sold_at).toLocaleDateString("en-GB")
+    : ""}
+</p>
               </div>
             </div>
           ))}

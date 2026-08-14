@@ -13,7 +13,7 @@ export default function SoldButton({
   async function handleSold() {
     const { data, error } = await supabase
       .from("products")
-      .update({ sold: true })
+      .update({ SOLD: true, sold_at: new Date().toISOString() })
       .eq("products", productId)
       .select();
 

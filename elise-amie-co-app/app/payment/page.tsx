@@ -11,20 +11,30 @@ type BagProduct = {
 };
 
 export default function PaymentPage() {
-  const [product, setProduct] = useState<BagProduct | null>(null);
+  const [products, setProducts] = useState<BagProduct[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const savedProduct = localStorage.getItem("amie-co-bag");
+    const savedBag = localStorage.getItem("amie-co-bag");
 
-    if (savedProduct) {
-      setProduct(JSON.parse(savedProduct));
+    if (savedBag) {
+      const saved = JSON.parse(savedBag);
+
+      if (Array.isArray(saved)) {
+        setProducts(saved);
+      } else {
+        setProducts([saved]);
+      }
     }
   }, []);
 
-  async function handlePayment() {
+  const subtotal = products.reduce(
+    (total, product) => total + Number(product.price),
+    0
+  );
 
-  if (!product || loading) return;
+  async function handlePayment() {
+    if (products.length === 0 || loading) return;
 
     setLoading(true);
 
@@ -35,7 +45,7 @@ export default function PaymentPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          productId: product.id,
+          productIds: products.map((product) => product.id),
         }),
       });
 
@@ -85,29 +95,36 @@ export default function PaymentPage() {
           </p>
         </div>
 
-        {product ? (
+        {products.length > 0 ? (
           <section className="mt-14">
             <div className="rounded-2xl border border-[#E7E2DC] bg-white p-6">
               <p className="text-xs uppercase tracking-[0.25em] text-[#C48A99]">
                 ♡ Your Order
               </p>
 
-              <div className="mt-6 flex items-center gap-5">
-                <img
-                  src={product.image_url}
-                  alt={product.name}
-                  className="h-32 w-24 rounded-xl object-cover object-top"
-                />
+              <div className="mt-6 space-y-6">
+                {products.map((product) => (
+                  <div
+                    key={product.id}
+                    className="flex items-center gap-5"
+                  >
+                    <img
+                      src={product.image_url}
+                      alt={product.name}
+                      className="h-32 w-24 rounded-xl object-cover object-top"
+                    />
 
-                <div>
-                  <h2 className="text-2xl font-light">
-                    {product.name}
-                  </h2>
+                    <div>
+                      <h2 className="text-xl font-light">
+                        {product.name}
+                      </h2>
 
-                  <p className="mt-2 text-lg text-[#B87989]">
-                    £{product.price}
-                  </p>
-                </div>
+                      <p className="mt-2 text-lg text-[#B87989]">
+                        £{product.price}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -116,15 +133,17 @@ export default function PaymentPage() {
                 <span className="uppercase tracking-[0.2em] text-neutral-500">
                   Subtotal
                 </span>
-                <span>£{product.price}</span>
+
+                <span>£{subtotal.toFixed(2)}</span>
               </div>
 
               <div className="mt-4 flex justify-between text-sm">
                 <span className="uppercase tracking-[0.2em] text-neutral-500">
                   Delivery
                 </span>
+
                 <span>
-                  {product.price >= 50 ? "Free" : "Calculated at payment"}
+                  {subtotal >= 50 ? "Free" : "Calculated at payment"}
                 </span>
               </div>
 
@@ -132,8 +151,9 @@ export default function PaymentPage() {
                 <span className="text-sm uppercase tracking-[0.2em]">
                   Total
                 </span>
+
                 <span className="text-2xl">
-                  £{product.price}
+                  £{subtotal.toFixed(2)}
                 </span>
               </div>
             </div>

@@ -11,26 +11,44 @@ type BagProduct = {
 };
 
 export default function BagPage() {
-  const [product, setProduct] = useState<BagProduct | null>(null);
+  const [products, setProducts] = useState<BagProduct[]>([]);
 
   useEffect(() => {
-    const savedProduct = localStorage.getItem("amie-co-bag");
+  const savedBag = localStorage.getItem("amie-co-bag");
 
-    if (savedProduct) {
-      setProduct(JSON.parse(savedProduct));
+  if (savedBag) {
+    const saved = JSON.parse(savedBag);
+
+    if (Array.isArray(saved)) {
+      setProducts(saved);
+    } else {
+      setProducts([saved]);
+      localStorage.setItem("amie-co-bag", JSON.stringify([saved]));
     }
-  }, []);
-
-  function removeFromBag() {
-    localStorage.removeItem("amie-co-bag");
-    setProduct(null);
   }
+}, []);
+
+  function removeFromBag(id: number) {
+    const updatedProducts = products.filter((product) => product.id !== id);
+
+    setProducts(updatedProducts);
+
+    localStorage.setItem(
+      "amie-co-bag",
+      JSON.stringify(updatedProducts)
+    );
+  }
+
+  const subtotal = products.reduce(
+    (total, product) => total + Number(product.price),
+    0
+  );
 
   return (
     <main className="min-h-screen bg-[#F8F6F2] px-6 py-16 text-[#2B2B2B]">
       <Link
         href="/"
-        className="pl-40 text-xs uppercase tracking-[0.2em] text-[#B87989] transition hover:text-[#2B2B2B]"
+        className="text-xs uppercase tracking-[0.2em] text-[#B87989] transition hover:text-[#2B2B2B]"
       >
         ← Home
       </Link>
@@ -40,39 +58,46 @@ export default function BagPage() {
           Your Bag
         </h1>
 
-        {product ? (
+        {products.length > 0 ? (
           <>
-            <section className="mt-14 rounded-2xl border border-[#E7E2DC] bg-white p-6">
-              <div className="flex items-center gap-6">
-                <img
-                  src={product.image_url}
-                  alt={product.name}
-                  className="h-36 w-28 rounded-xl object-cover object-top"
-                />
+            <div className="mt-14 space-y-6">
+              {products.map((product) => (
+                <section
+                  key={product.id}
+                  className="rounded-2xl border border-[#E7E2DC] bg-white p-6"
+                >
+                  <div className="flex items-center gap-6">
+                    <img
+                      src={product.image_url}
+                      alt={product.name}
+                      className="h-36 w-28 rounded-xl object-cover object-top"
+                    />
 
-                <div className="flex-1">
-                  <p className="text-xs uppercase tracking-[0.25em] text-[#C48A99]">
-                    ♡ Your Piece
-                  </p>
+                    <div className="flex-1">
+                      <p className="text-xs uppercase tracking-[0.25em] text-[#C48A99]">
+                        ♡ Your Piece
+                      </p>
 
-                  <h2 className="mt-3 text-2xl font-light">
-                    {product.name}
-                  </h2>
+                      <h2 className="mt-3 text-2xl font-light">
+                        {product.name}
+                      </h2>
 
-                  <p className="mt-2 text-lg text-[#B87989]">
-                    £{product.price}
-                  </p>
+                      <p className="mt-2 text-lg text-[#B87989]">
+                        £{product.price}
+                      </p>
 
-                  <button
-                    type="button"
-                    onClick={removeFromBag}
-                    className="mt-5 text-xs uppercase tracking-[0.2em] text-neutral-400 transition hover:text-[#B87989]"
-                  >
-                    Remove from Bag
-                  </button>
-                </div>
-              </div>
-            </section>
+                      <button
+                        type="button"
+                        onClick={() => removeFromBag(product.id)}
+                        className="mt-5 text-xs uppercase tracking-[0.2em] text-neutral-400 transition hover:text-[#B87989]"
+                      >
+                        Remove from Bag
+                      </button>
+                    </div>
+                  </div>
+                </section>
+              ))}
+            </div>
 
             <div className="mt-10 flex items-center justify-between border-t border-[#E7E2DC] pt-8">
               <span className="text-sm uppercase tracking-[0.2em] text-neutral-500">
@@ -80,7 +105,7 @@ export default function BagPage() {
               </span>
 
               <span className="text-xl">
-                £{product.price}
+                £{subtotal}
               </span>
             </div>
 

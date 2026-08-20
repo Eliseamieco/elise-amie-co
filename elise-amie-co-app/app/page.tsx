@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { supabase } from "../lib/supabase";
+import BagLink from "./components/BagLink";
 
 export default async function Home() {
   const { data: products, error } = await supabase
@@ -16,9 +17,14 @@ if (error) {
     
     <main className="min-h-screen bg-[#F8F6F2] text-[#2B2B2B]">
       
-      <div className="bg-[#E8C8D0] py-2 text-center text-xs uppercase tracking-[0.25em] text-[#2B2B2B]">
+  <div className="bg-[#E8C8D0] py-2 text-center text-xs uppercase tracking-[0.25em] text-[#2B2B2B]">
   Free UK Delivery on Orders Over £50 • 
 </div>
+<div className="bg-white px-6 py-3 text-right">
+  <BagLink />
+</div>
+
+   
 <nav className="border-b border-[#E7E2DC] bg-white">
   <div className="mx-auto max-w-6xl px-6 py-8">
 
@@ -37,20 +43,32 @@ if (error) {
       
     </p>
 
-   <div className="mt-6 flex justify-center gap-12 text-xs uppercase tracking-[0.25em]">
-  <Link href="/" className="transition hover:text-[#C48A99]">
+   <div className="mt-6 flex justify-center gap-5 text-[10px] uppercase tracking-[0.2em] sm:gap-8 sm:text-xs sm:tracking-[0.25em]">
+  <Link
+    href="/"
+    className="whitespace-nowrap transition hover:text-[#C48A99]"
+  >
     Home
   </Link>
 
- <Link href="/collection" className="transition hover:text-[#C48A99]">
-  Our Collection
-</Link>
+  <Link
+    href="/collection"
+    className="whitespace-nowrap transition hover:text-[#C48A99]"
+  >
+    Our Collection
+  </Link>
 
-  <Link href="/about" className="transition hover:text-[#C48A99]">
+  <Link
+    href="/about"
+    className="whitespace-nowrap transition hover:text-[#C48A99]"
+  >
     About
   </Link>
 
-  <Link href="/contact" className="transition hover:text-[#C48A99]">
+  <Link
+    href="/contact"
+    className="whitespace-nowrap transition hover:text-[#C48A99]"
+  >
     Contact
   </Link>
 </div>
@@ -76,7 +94,7 @@ if (error) {
 
 
 
-        <div className="mt-6 grid gap-8 md:grid-cols-3">
+        <div className="mt-6 grid w-full max-w-6xl grid-cols-1 gap-8 lg:grid-cols-3">
 
           {products?.map((product) => (
   <div
@@ -85,10 +103,10 @@ if (error) {
   >
     <div className="overflow-hidden">
       <img
-        src={String(product.image_url).trim()}
-        alt={product.name}
-        className="h-96 w-full object-cover object-top transition duration-500 hover:scale-105"
-      />
+  src={String(product.image_url).trim()}
+  alt={product.name}
+  className="h-72 w-full object-contain bg-[#F3ECE8] transition duration-500 hover:scale-105 sm:h-80 lg:h-96"
+/>
     </div>
 
     <div className="p-6">

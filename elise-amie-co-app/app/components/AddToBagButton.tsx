@@ -17,7 +17,18 @@ export default function AddToBagButton({
   const router = useRouter();
 
   function handleAddToBag() {
-    localStorage.setItem("amie-co-bag", JSON.stringify(product));
+    const savedBag = localStorage.getItem("amie-co-bag");
+
+    const bag: Product[] = savedBag ? JSON.parse(savedBag) : [];
+
+    const alreadyInBag = bag.some((item) => item.id === product.id);
+
+    if (!alreadyInBag) {
+      bag.push(product);
+    }
+
+    localStorage.setItem("amie-co-bag", JSON.stringify(bag));
+
     router.push("/bag");
   }
 

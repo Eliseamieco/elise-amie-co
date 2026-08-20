@@ -131,6 +131,17 @@ if (product.SOLD) {
           </div>
         </div>
       </div>
+       <footer className="border-t border-[#E7E2DC] py-12 text-center">
+        <img
+          src="/logo.png"
+          alt="Amie Co"
+          className="mx-auto w-40"
+        />
+
+        <p className="mt-4 text-xs uppercase tracking-[0.25em] text-neutral-400">
+          Style, Loved Again
+        </p>
+      </footer>
     </main>
   );
 }
